@@ -41,8 +41,6 @@ public class EvaluateString {
 											OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
 										while (!OperatorValues.empty() && Priority.Order(tokens[i], OperatorValues.peek()));
 									}
-
-
 									OperatorValues.push(tokens[i]);
 									break;
 							}
@@ -51,8 +49,6 @@ public class EvaluateString {
 					break;
 			}
 		}
-
-
 		while (!OperatorValues.empty())
 			OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
 
