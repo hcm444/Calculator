@@ -1,57 +1,54 @@
-
-import java.util.Stack; 
+import java.util.Stack;
 
 public class EvaluateString {
-	public static int evaluate(String expression) 
-	{ 
-		char[] tokens = expression.toCharArray(); 
+	public static int evaluate(String expression) {
+		char[] tokens = expression.toCharArray();
+		Stack < Integer > OperandValues;
+		OperandValues = new Stack < Integer > ();
+		Stack < Character > OperatorValues;
+		OperatorValues = new Stack < Character > ();
+		for (int i = 0; i < tokens.length; i++) {
+			switch (tokens[i]) {
+				case ' ':
+					continue;
+				case '(':
+					OperatorValues.push(tokens[i]);
+					break;
+				default:
+					if (tokens[i] >= '0' && tokens[i] <= '9') {
+						StringBuffer buffer = new StringBuffer();
+						// There may be more than one digits in number
+						if (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9') {
+							do {
+								buffer.append(tokens[i++]);
+							} while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9');
+						}
+						OperandValues.push(Integer.parseInt(buffer.toString()));
+					} else {
+						if (tokens[i] == ')') {
+							while (OperatorValues.peek() != '(')
+								OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
+							OperatorValues.pop();
+						} else {
+							switch (tokens[i]) {
+								case '+':
+								case '-':
+								case '*':
+								case '/':
+
+									if (!OperatorValues.empty() && Priority.Order(tokens[i], OperatorValues.peek())) {
+										do
+											OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
+										while (!OperatorValues.empty() && Priority.Order(tokens[i], OperatorValues.peek()));
+									}
 
 
-		Stack<Integer> OperandValues;
-		OperandValues = new Stack<Integer>();
-
-
-		Stack<Character> OperatorValues;
-		OperatorValues = new Stack<Character>();
-
-		for (int i = 0; i < tokens.length; i++)
-		{
-
-			if (tokens[i] == ' ')
-				continue;
-
-
-			if (tokens[i] >= '0' && tokens[i] <= '9')
-			{
-				StringBuffer buffer = new StringBuffer();
-				// There may be more than one digits in number
-				while (true) {
-					if (i >= tokens.length || tokens[i] < '0' || tokens[i] > '9') break;
-					buffer.append(tokens[i++]);
-				}
-				OperandValues.push(Integer.parseInt(buffer.toString()));
-			}
-
-
-			else if (tokens[i] == '(')
-				OperatorValues.push(tokens[i]);
-
-
-			else if (tokens[i] == ')') {
-				while (OperatorValues.peek() != '(')
-					OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
-				OperatorValues.pop();
-			}
-
-
-			else if (tokens[i] == '+' || tokens[i] == '-' ||
-					tokens[i] == '*' || tokens[i] == '/') {
-
-				while (!OperatorValues.empty() && Priority.Order(tokens[i], OperatorValues.peek()))
-					OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
-
-
-				OperatorValues.push(tokens[i]);
+									OperatorValues.push(tokens[i]);
+									break;
+							}
+						}
+					}
+					break;
 			}
 		}
 
