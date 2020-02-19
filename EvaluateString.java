@@ -1,5 +1,4 @@
 import java.util.Stack;
-
 public class EvaluateString {
 	public static int evaluate(String expression) {
 		char[] tokens = expression.toCharArray();
@@ -48,8 +47,6 @@ public class EvaluateString {
 		}
 		while (!OperatorValues.empty())
 			OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
-
-
 		return OperandValues.pop();
 	}
 
