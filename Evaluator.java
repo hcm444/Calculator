@@ -3,11 +3,14 @@ public class Evaluator {
         int result = 0;
         if (op == '+') {
             result = OperatorOne + OperatorTwo;
-        } else if (op == '-') {
+        }
+        if (op == '-') {
             result = OperatorOne - OperatorTwo;
-        } else if (op == '*') {
+        }
+        if (op == '*') {
             result = OperatorOne * OperatorTwo;
-        } else if (op == '/') {
+        }
+        if (op == '/') {
             if (OperatorTwo == 0)
                 throw new
                         UnsupportedOperationException("Cannot divide by zero");
