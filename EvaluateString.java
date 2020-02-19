@@ -17,7 +17,6 @@ public class EvaluateString {
 				default:
 					if (tokens[i] >= '0' && tokens[i] <= '9') {
 						StringBuffer buffer = new StringBuffer();
-						// There may be more than one digits in number
 						if (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9') {
 							do {
 								buffer.append(tokens[i++]);
