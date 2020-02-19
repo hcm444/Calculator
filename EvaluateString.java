@@ -23,13 +23,13 @@ public class EvaluateString {
 
 			if (tokens[i] >= '0' && tokens[i] <= '9')
 			{
-				StringBuffer sbuf = new StringBuffer();
+				StringBuffer buffer = new StringBuffer();
 				// There may be more than one digits in number
 				while (true) {
 					if (i >= tokens.length || tokens[i] < '0' || tokens[i] > '9') break;
-					sbuf.append(tokens[i++]);
+					buffer.append(tokens[i++]);
 				}
-				OperandValues.push(Integer.parseInt(sbuf.toString()));
+				OperandValues.push(Integer.parseInt(buffer.toString()));
 			}
 
 
