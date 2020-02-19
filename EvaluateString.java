@@ -24,8 +24,10 @@ public class EvaluateString {
 							while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9');
 						OperandValues.push(Integer.parseInt(buffer.toString()));
 					} else if (tokens[i] == ')') {
-						while (OperatorValues.peek() != '(')
+						while (true) {
+							if (OperatorValues.peek() == '(') break;
 							OperandValues.push(Evaluator.Apply(OperatorValues.pop(), OperandValues.pop(), OperandValues.pop()));
+						}
 						OperatorValues.pop();
 					} else switch (tokens[i]) {
 						case '+':
